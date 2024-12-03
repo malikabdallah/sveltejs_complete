@@ -1,14 +1,26 @@
 <script>
+    export let initialCount;
+    export let maxCount;
+    
     let count = 0;
-
+    
     function addCount(){
-      count++;
+      if(count<maxCount){
+        count++;
+      }
     }
+
+    $:{
+      console.log("props "+ JSON.stringify($$props));
+      console.log("restProps "+JSON.stringify($$restProps));
+    }
+
     //let chaineDeCharactere = "";
     $:chaineDeCharactere = `Vous avez cliquez ${count} fois.`
  
     $: if(count >5 ){
-      console.log(`vous avez cliquez ${count} fois`)
+      console.log(`vous avez cliquez ${count} fois`);
+      console.log({initialCount})
     }
 </script>
 

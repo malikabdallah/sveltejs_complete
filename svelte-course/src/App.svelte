@@ -1,7 +1,12 @@
 <script>
-  import Counter from './lib/Counter.svelte'
+  import Button from "./lib/Button.svelte";
 
 </script>
 
-<Counter></Counter>
+<!--   <Button title="test" />
+ -->
 
+ <Button>Mon texte</Button>
+<style>
+
+</style>
