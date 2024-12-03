@@ -46,12 +46,12 @@ On peut passé plusieurs props via un objet avec la méthode suivante
 si data.variable contient toutes les variables du même nom que le component
 
 pour affiché les props transmise 
-<p>
+<code>
  $:{
       console.log("props "+ JSON.stringify($$props));
       console.log("restProps "+JSON.stringify($$restProps));
     }
-</p>
+</code>
 props contient les props passé au composant
 restProps contient les props passé au composant mais pas défini avec export let .
 
