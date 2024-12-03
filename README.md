@@ -16,14 +16,14 @@ npm create vite@latest svelte-course -- --template svelte
 
 # reactive statement
 
-utilisation du $:
-$:variable => la variable est devenu reactive (let implciite)
+utilisation du $ :
+<p>$:variable => la variable est devenu reactive (let implciite)</p>
 
 pour bénéficié du reactive statement la variable réactive doit apparaite dans l'expression
-
-$: chaine = 'test ${methode()}' ne marche pas
+<p>
+$: chaine = 'test ${methode()}' ne marche pas <br/>
 $: chaine = 'test ${methode(a)}' marche 
-
+</p>
 # props 
 
 les props sont utilisé pour le binding d'attribut dans les composants
@@ -46,13 +46,17 @@ On peut passé plusieurs props via un objet avec la méthode suivante
 si data.variable contient toutes les variables du même nom que le component
 
 pour affiché les props transmise 
+<p>
  $:{
       console.log("props "+ JSON.stringify($$props));
       console.log("restProps "+JSON.stringify($$restProps));
     }
-
+</p>
 props contient les props passé au composant
 restProps contient les props passé au composant mais pas défini avec export let .
+
+# svlete-preprocess
+-permet de géré le scss , typescript et bien plus 
 
 
 # Slot
