@@ -58,6 +58,8 @@ restProps contient les props passé au composant mais pas défini avec export le
 # svlete-preprocess
 -permet de géré le scss , typescript et bien plus 
 
+npm i svelte-preprocess
+npm i sass
 
 # Slot
 
@@ -75,3 +77,96 @@ Slot fallback imaginons qu on initialise pas le slot on peut
 <button><slot>Text par defaut </slot></button>
 
 si on initialise pas le slot ce sera cette valeur
+
+
+## encore plus de slots
+
+<p>
+$$slots
+</p>
+pour recupère les slots
+
+on peut variabilisé un slot
+    <slot {isLeftHovered}></slot>
+et récupère la valeur dans le composant parent via la directire
+let
+
+## condition
+
+{#if}
+
+{:else}
+
+{/if}
+
+## envoyé des evenements depuis un enfant 
+
+## preventdefautt
+
+
+## restprops customization
+
+<button {...$$restProps}>
+
+peut permettre de setter les valeurs du button via props
+
+<Button disabled > </Button>
+
+## Binding
+
+Handling Inputs in Svelte
+Svelte provides multiple ways to handle and bind input values. This flexibility allows developers to choose the most suitable approach for their specific use case. Below are three common methods:
+
+<h1>Method 1: Using bind:this for Direct DOM Access</h1>
+The bind:this directive allows you to bind the input element to a variable. This gives you direct access to the DOM element, enabling manual manipulation of its properties or methods.
+
+<script>
+    let input;
+</script>
+
+<!-- Bind the input element to the `input` variable -->
+<input bind:this={input} />
+
+<p>The input element is bound to: {input}</p>
+Use Case
+Ideal when you need programmatic access to the input element, such as focusing it, clearing its value, or working directly with DOM methods.
+
+
+<h1>Method 2: Using on:input for Manual Updates</h1>
+The on:input directive lets you listen to the input event and manually update a variable. This approach provides complete control over how the value is handled or transformed during updates.
+
+
+<script>
+    let inputText = '';
+</script>
+
+<!-- Listen to the `input` event and update `inputText` manually -->
+<input
+    on:input={(e) => {
+        console.log("Current value: " + e.currentTarget.value);
+        inputText = e.currentTarget.value;
+    }}
+/>
+
+<p>You typed: {inputText}</p>
+Use Case
+Best for scenarios where you need additional logic during input updates, such as validation, formatting, or triggering side effects.
+
+<h1>Method 3: Using bind:value for Two-Way Binding</h1>
+The bind:value directive is the simplest and most idiomatic way to achieve two-way binding in Svelte. It automatically synchronizes the input's value with the bound variable.
+
+<script>
+    let inputText = '';
+</script>
+
+<!-- Bind the input's value to `inputText` -->
+<input bind:value={inputText} />
+
+<p>You typed: {inputText}</p>
+Use Case
+Ideal for straightforward input handling where no custom logic or side effects are required. This is the most common and recommended approach for simple use cases.
+Comparison of Methods
+Method	Description	Best For
+bind:this	Provides direct access to the DOM element, allowing for manual manipulation.	Advanced use cases requiring DOM interaction, like programmatic focus or accessing properties.
+on:input	Listens to the input event and updates a variable manually, allowing for additional custom logic.	Scenarios where custom side effects or transformations are needed during input updates.
+bind:value	Simplifies two-way binding, automatically syncing the variable with the input's value.	Simple and idiomatic input handling without extra logic.

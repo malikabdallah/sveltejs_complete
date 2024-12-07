@@ -16,6 +16,8 @@
     "vite": "^6.0.1"
   },
   "dependencies": {
-    "svelte-icons": "^2.1.0"
+    "svelte-icons": "^2.1.0",
+    "uid": "^2.0.2",
+    "uuid": "^11.0.3"
   }
 }
