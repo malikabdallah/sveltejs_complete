@@ -1,6 +1,6 @@
 <script>
-  import Counter from './lib/Counter.svelte'
-  
+  import Counter from './Counter.svelte'
+  alert("loader counter");
   
   const data = {
     initialCount:0,
