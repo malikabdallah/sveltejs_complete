@@ -124,8 +124,7 @@ The bind:this directive allows you to bind the input element to a variable. This
     let input;
 </script>
 
-<!-- Bind the input element to the `input` variable -->
-<input bind:this={input} />
+<code><input bind:this={input} /></code>
 
 <p>The input element is bound to: {input}</p>
 Use Case
@@ -141,13 +140,14 @@ The on:input directive lets you listen to the input event and manually update a 
 </script>
 
 <!-- Listen to the `input` event and update `inputText` manually -->
+<code>
 <input
     on:input={(e) => {
         console.log("Current value: " + e.currentTarget.value);
         inputText = e.currentTarget.value;
     }}
 />
-
+</code>
 <p>You typed: {inputText}</p>
 Use Case
 Best for scenarios where you need additional logic during input updates, such as validation, formatting, or triggering side effects.
@@ -160,8 +160,9 @@ The bind:value directive is the simplest and most idiomatic way to achieve two-w
 </script>
 
 <!-- Bind the input's value to `inputText` -->
-<input bind:value={inputText} />
 
+<code><input bind:value={inputText} />
+</code>
 <p>You typed: {inputText}</p>
 Use Case
 Ideal for straightforward input handling where no custom logic or side effects are required. This is the most common and recommended approach for simple use cases.
