@@ -1,20 +1,79 @@
+
 <script>
-    export let todos = [];  
+    import { createEventDispatcher } from 'svelte';
     import Button from './Button.svelte';  
+    import { v4 as uuid } from "uuid";
+    export let todos = [];  
+    export const readOnly = 'read only';
+
+
+    export function clearInput(){
+        inputText='';
+    }
+
+    export function focusInput(){
+        input.focus();
+    }
 
     let input;
     let inputText = '';
+    let debugEvent; 
+
+    const dispatcher = createEventDispatcher();
+
+    function deleteTodo(id){
+        console.log("id "+id);
+        dispatcher('deleteTodo',{id:id});
+    }
 
     function handleAddTodo(){
-        console.log("input "+input.value);
+       const isNotCancelable =  dispatcher('addTodo',{title:inputText},{cancelable:true});
+       if(isNotCancelable){
+        console.log("not prevent default");
+        inputText = '';
+       }
+     
+
+        /*
+        if(!inputText) return;
+        todos = [...todos,{
+            id:uuid(),
+            title:inputText,
+            completed:false
+        }];
+        inputText = '';
+        console.log("added todo");
+        */
+    }
+
+    function handleRemove(id){
+        console.log("id:"+id);
+        dispatcher("removeTodo",{id:id});
+    }
+
+    function handleCompleted(id,completed){
+        console.log("id "+id+" completed "+completed);
+        dispatcher("updateStatus",{id:id,completed:!completed});
     }
 
 </script>
 
 <ul>
-    {#each todos as todo, index (todo.id)}
+    {#each todos as {id, title, completed}, index (id)}
         {@const number = index + 1}
-        <li>{number} - {todo.title}</li>
+        <li>
+            <label>
+<!--                 {@debug id, title};
+ -->                <input type="checkbox" checked={completed} on:input={(event)=>{
+                    debugEvent = event;
+                    //event.currentTarget.checked = completed;
+                    //handleCompleted(id,completed);
+                }} />
+                {title}
+            </label>
+            <button on:click={()=>handleRemove(id)}>remove</button>
+
+        </li>
     {/each}
 
     <!--
@@ -24,16 +83,10 @@
 </ul>    
 value : {inputText}
 
+<!-- {@debug x }
+ -->
 <form class="add-todo-form" on:submit|preventDefault={handleAddTodo}>
     
-    <input bind:this={input} />
-     <input
-        on:input={(e) =>{
-            console.log("e "+e.currentTarget.value);
-            inputText = e.currentTarget.value;
-        }}
-    />    
-
-    <input bind:value={inputText}/>
-    <Button>add</Button>
+    <input bind:this={input} bind:value={inputText}/>
+    <Button disabled={!inputText}>Add</Button>
 </form>

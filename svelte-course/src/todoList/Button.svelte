@@ -1,13 +1,22 @@
 <script>
 
+$: {
+    console.log("rest props: ", JSON.stringify($$restProps));
+}
 </script>
 
-<button>
+<button {...$$restProps}>
     <slot></slot>
 </button>    
 
 
 <style>
+
+    button:disabled {
+        background-color: #ccc; /* Example styling for disabled state */
+        cursor: not-allowed;
+    }
+
     .left-content {
         height: 150px;
         width: 150px;
