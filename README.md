@@ -161,8 +161,7 @@ The bind:value directive is the simplest and most idiomatic way to achieve two-w
 
 <!-- Bind the input's value to `inputText` -->
 
-<code><input bind:value={inputText} />
-</code>
+<code><input bind:value={inputText} /></code>
 <p>You typed: {inputText}</p>
 Use Case
 Ideal for straightforward input handling where no custom logic or side effects are required. This is the most common and recommended approach for simple use cases.
@@ -171,3 +170,55 @@ Method	Description	Best For
 bind:this	Provides direct access to the DOM element, allowing for manual manipulation.	Advanced use cases requiring DOM interaction, like programmatic focus or accessing properties.
 on:input	Listens to the input event and updates a variable manually, allowing for additional custom logic.	Scenarios where custom side effects or transformations are needed during input updates.
 bind:value	Simplifies two-way binding, automatically syncing the variable with the input's value.	Simple and idiomatic input handling without extra logic.
+
+
+## two way databinding 
+
+<TodoList bind:todos />
+
+one way data binding
+<TodoList {todos}>
+
+| Feature                    | `<TodoList bind:todos>`                 | `<TodoList {todos}>`                  |
+|----------------------------|------------------------------------------|----------------------------------------|
+| **Data Flow**              | Two-way (parent ↔ child)                | One-way (parent → child)               |
+| **Child Modifications**    | Reflect in parent automatically         | Do not reflect in parent              |
+| **Parent Updates**         | Reflect in child automatically          | Reflect in child automatically        |
+| **Use Case**               | When child modifies data                | When child only reads data            |
+
+
+Attention le two way data binding peut engré des problèmes de source de verité , il vaut mieux passé par les props.
+
+Utilisé des custom event pour transmettre l'information
+
+
+
+# function arrow
+
+Use an arrow function (() => handleFocus(5)) to defer execution and pass arguments.
+Directly passing handleFocus(5) executes the function immediately, which is not what on:click expects.
+
+on:click 
+
+() => handleFocus(5) creates a new function that doesn't execute immediately.
+The Svelte on:click directive expects a function reference to call when the button is clicked.   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# transition et animation

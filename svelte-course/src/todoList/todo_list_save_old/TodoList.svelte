@@ -1,11 +1,29 @@
 
 <script>
-    import { createEventDispatcher } from 'svelte';
+    import { createEventDispatcher, onMount, onDestroy, beforeUpdate, afterUpdate } from 'svelte';
     import Button from './Button.svelte';  
     import { v4 as uuid } from "uuid";
     export let todos = [];  
+    let listDiv;
     export const readOnly = 'read only';
 
+    onMount(()=>{
+        console.log("mounted");
+    });
+
+    onDestroy(()=>{
+        console.log("destroy");
+    })
+
+    beforeUpdate(()=>{
+        if(listDiv){
+            console.log("before update "+listDiv.offsetHeight);
+        }
+    });
+
+    afterUpdate(()=>{
+        console.log("before update "+listDiv.offsetHeight);
+    });
 
     export function clearInput(){
         inputText='';
@@ -59,23 +77,25 @@
 </script>
 
 <ul>
-    {#each todos as {id, title, completed}, index (id)}
-        {@const number = index + 1}
-        <li>
-            <label>
-<!--                 {@debug id, title};
- -->                <input type="checkbox" checked={completed} on:input={(event)=>{
-                    debugEvent = event;
-                    //event.currentTarget.checked = completed;
-                    //handleCompleted(id,completed);
-                }} />
-                {title}
-            </label>
-            <button on:click={()=>handleRemove(id)}>remove</button>
+    <div class="todo-list" bind:this={listDiv}>
 
-        </li>
-    {/each}
+        {#each todos as {id, title, completed}, index (id)}
+            {@const number = index + 1}
+            <li>
+                <label>
+    <!--                 {@debug id, title};
+    -->                <input type="checkbox" checked={completed} on:input={(event)=>{
+                        debugEvent = event;
+                        //event.currentTarget.checked = completed;
+                        //handleCompleted(id,completed);
+                    }} />
+                    {title}
+                </label>
+                <button on:click={()=>handleRemove(id)}>remove</button>
 
+            </li>
+        {/each}
+    </div>
     <!--
         si on veut destructure l object 
         todos as {id,title} index (id)

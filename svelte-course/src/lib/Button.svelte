@@ -2,11 +2,12 @@
     export let size = 'small';
     export let shadow = false;
     export let bgcolor = 'blue';
+    export let type = "submit";
     let isLeftHovered = false; // Initialize the variable
 </script>
 
 
-<button style:background-color={bgcolor} class:size-lg={size === 'large'} class:size-sm={size !== 'large'} class:shadow>
+<button {type} style:background-color={bgcolor} class:size-lg={size === 'large'} class:size-sm={size !== 'large'} class:shadow>
     {#if $$slots.leftContent}
         <!-- Mouse events to set isLeftHovered -->
         <div class="left-content"
